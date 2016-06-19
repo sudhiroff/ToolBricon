@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BriconTool" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=sudhir\sql2008;Initial Catalog=BriconTool;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BriconToolConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.bric_currency" Member="bric_currencies">
+    <Type Name="bric_currency">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Currency" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bric_FinancialYear" Member="bric_FinancialYears">
+    <Type Name="bric_FinancialYear">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FinancialYear" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bric_PaymentType" Member="bric_PaymentTypes">
+    <Type Name="bric_PaymentType">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PaymentType" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bric_user" Member="bric_users">
+    <Type Name="bric_user">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="passeword" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="loginType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bric_Vehicle" Member="bric_Vehicles">
+    <Type Name="bric_Vehicle">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="VehicleNo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bric_InvoiceItem" Member="bric_InvoiceItems">
+    <Type Name="bric_InvoiceItem">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="InvoiceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TradeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bric_PurchaseOrder" Member="bric_PurchaseOrders">
+    <Type Name="bric_PurchaseOrder">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OrderId" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="OrderDescription" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="PODate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="ShippingAddress" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="CustomerId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bric_Setting" Member="bric_Settings">
+    <Type Name="bric_Setting">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="RegAddressLine1" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="RegAddressLine2" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ContactPerson" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="BranchAddressLine1" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="BranchAddressLine2" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TinCstNo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="CompanyLogo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bric_Trade_Master" Member="bric_Trade_Masters">
+    <Type Name="bric_Trade_Master">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="POrderId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemCode" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ItemDescription" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="VehicleNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="V_length_ft" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="V_length_Inc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="V_wdth_ft" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="V_wdth_Inc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="V_height_ft" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="V_height_Inc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChallanNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SuplierId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ShippingAddress" Type="System.String" DbType="VarChar(400)" CanBeNull="true" />
+      <Column Name="Shipdate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UnitPrice" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="SubTotal" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="TaxPercentage" Type="System.Decimal" DbType="Decimal(18,1)" CanBeNull="true" />
+      <Column Name="TotalAmt" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="BuyRate" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="BuyCost" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="IsInvoiceGenerate" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bric_item" Member="bric_items">
+    <Type Name="bric_item">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ItemName" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemCode" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MeasureUnit" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TaxPercent" Type="System.Decimal" DbType="Decimal(18,1)" CanBeNull="true" />
+      <Column Name="IsCalculateByDimenson" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bric_PO_Item" Member="bric_PO_Items">
+    <Type Name="bric_PO_Item">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="POId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ItemCode" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemDes" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemTax" Type="System.Decimal" DbType="Decimal(18,1)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BuyRate" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="SellRate" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="SuplierId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="RateFrom" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="RateTo" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bric_customer" Member="bric_customers">
+    <Type Name="bric_customer">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerId" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CustomerName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ContactPerson" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CustomerEmail" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="customerAddress" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="MobileNo" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TINNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Status" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bric_CustomerSite" Member="bric_CustomerSites">
+    <Type Name="bric_CustomerSite">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ContactPerson" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="MobileNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="EmailId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SiteAddress" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bric_supplier" Member="bric_suppliers">
+    <Type Name="bric_supplier">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SupplierId" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="SupplierName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ContactPerson" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SupplierEmail" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SupplierAddress" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="MobileNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Status" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bric_InvoiceMst" Member="bric_InvoiceMsts">
+    <Type Name="bric_InvoiceMst">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceNo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IsCash" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="tempInvoiceNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SalesPerson" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Remark" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bric_TransactionCategory" Member="bric_TransactionCategories">
+    <Type Name="bric_TransactionCategory">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TransactionCategory" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bric_TransactionReference" Member="bric_TransactionReferences">
+    <Type Name="bric_TransactionReference">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TransactionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TransactionRef" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bric_DailyCashbook" Member="bric_DailyCashbooks">
+    <Type Name="bric_DailyCashbook">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Narration" Type="System.String" DbType="NVarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="TransactionCat" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TransactionRef" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="TransactionType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Function Name="dbo.GET_INVOICE_ITEM" Method="GET_INVOICE_ITEM">
+    <Parameter Name="InvoiceId" Parameter="invoiceId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GET_INVOICE_ITEMResult">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="POrderId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemCode" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ItemDescription" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="VehicleNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="V_length_ft" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="V_length_Inc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="V_wdth_ft" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="V_wdth_Inc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="V_height_ft" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="V_height_Inc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChallanNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SuplierId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ShippingAddress" Type="System.String" DbType="VarChar(400)" CanBeNull="true" />
+      <Column Name="Shipdate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UnitPrice" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="SubTotal" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="TaxPercentage" Type="System.Decimal" DbType="Decimal(18,1)" CanBeNull="true" />
+      <Column Name="TotalAmt" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="BuyRate" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="BuyCost" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="IsInvoiceGenerate" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GET_CREATE_INVOICE_ITEM" Method="GET_CREATE_INVOICE_ITEM">
+    <Parameter Name="ClientId" Parameter="clientId" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="SiteAddress" Parameter="siteAddress" Type="System.String" DbType="VarChar(500)" />
+    <Parameter Name="FromDate" Parameter="fromDate" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="ToDate" Parameter="toDate" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="GET_CREATE_INVOICE_ITEMResult">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="POrderId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemCode" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ItemDescription" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="VehicleNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UnitPrice" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="SubTotal" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="BuyRate" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="BuyCost" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="TaxPercentage" Type="System.Decimal" DbType="Decimal(18,1)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

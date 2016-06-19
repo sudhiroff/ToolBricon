@@ -1,0 +1,16 @@
+﻿
+drop table dbo.bric_currency,dbo.bric_customer,dbo.bric_FinancialYear,dbo.bric_item,
+dbo.bric_PaymentType,dbo.bric_PurchaseOrder,dbo.bric_supplier,dbo.bric_user,dbo.bric_InvoiceItem,
+dbo.bric_InvoiceMst,dbo.bric_PO_Item,dbo.bric_Setting,dbo.bric_Trade_Master,dbo.bric_Vehicle
+
+
+
+
+ALTER TABLE dbo.bric_item
+ADD IsCalculateByDimenson bit NOT NULL
+DEFAULT 0 WITH VALUES
+
+ALTER TABLE dbo.bric_InvoiceMst
+ADD IsCash bit NOT NULL 
+DEFAULT 0 WITH VALUES
+

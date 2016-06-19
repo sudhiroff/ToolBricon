@@ -1,0 +1,81 @@
+﻿body{
+    font-size:13px;
+}
+.form-control
+{
+	width:210px;
+	height:32px;
+}
+.form-control.input-sm
+{
+	width:130px;
+}
+ul.ui-autocomplete
+{
+	z-index:100000;
+}
+.modal-lg
+{
+	width:1024px;
+}
+
+.modal-body .col-md-12
+{
+	padding-left:0px;
+}
+
+.modal-body 
+{
+	padding-left:0px;
+}
+
+.modal-dialog .modal-body {
+    padding-left:15px;
+}
+.datepckr{}
+
+.grid-item{
+    padding:3px 0 3px 5px;
+    text-indent:2px;
+}
+.chlIscash {
+    margin-left: 9px;
+}
+.chlIscash label{
+    font-weight:normal;
+}
+
+
+.pagination{
+   margin: 2px 2px;
+}
+.pagination>td{
+    padding:0px!important;
+    border:none!important;
+}
+
+.pagination table td a, .pagination table td span {
+    position: relative;
+    float: left;
+    padding: 2px 5px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.pagination table td span{
+    background-color:forestgreen;
+    color:#fff;
+}
+.fa-rupee:before, .fa-inr:before {
+    padding-right: 2px;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+    padding:5px;
+}
+.page-header {
+    padding-bottom: 5px;
+    margin: 15px 0 20px;
+}

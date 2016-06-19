@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DataClasses">
+  <DataContextMoniker Name="/DataClassesDataContext" />
+  <nestedChildShapes>
+    <classShape Id="135dbb49-94cb-418b-84e3-49269d3f2820" isExpanded="false" absoluteBounds="0.625, 0.75, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/bric_currency" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ea704e00-3944-4231-8646-f73e792d6cb8" absoluteBounds="0.64, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c6348482-c7b7-44da-8aab-8b591b7f2f03" isExpanded="false" absoluteBounds="3.125, 0.75, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/bric_FinancialYear" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3b7e4ca1-db95-4eef-a247-204a06791b06" absoluteBounds="3.14, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5b808a27-4fa3-4825-9839-0483471396f5" isExpanded="false" absoluteBounds="0.625, 1.375, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/bric_PaymentType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="170a9a7f-827d-4834-adb1-975506df0eda" absoluteBounds="0.63999999999999968, 1.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ee7d9d43-fa12-4f34-b9fa-d8feebf70c4b" isExpanded="false" absoluteBounds="3.125, 1.5, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/bric_user" />
+      <nestedChildShapes>
+        <elementListCompartment Id="036beebc-1a85-43fb-9ff4-08ecabcdf16c" absoluteBounds="3.1399999999999997, 1.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="626c1a80-fa65-4bab-afb0-83af85759344" isExpanded="false" absoluteBounds="0.625, 2.75, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/bric_Vehicle" />
+      <nestedChildShapes>
+        <elementListCompartment Id="da633bd5-1580-4615-9559-e06f27003289" absoluteBounds="0.63999999999999968, 3.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ceb89b51-a134-490b-966b-533d4e4cfdc9" isExpanded="false" absoluteBounds="5.375, 3.5, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/bric_InvoiceItem" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a1aba321-9270-4a5d-9c63-b002f49cfded" absoluteBounds="5.39, 3.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c7d13ad3-93f2-4e4d-9aee-6b47d02c6351" isExpanded="false" absoluteBounds="5.375, 0.75, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/bric_PurchaseOrder" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c8b65057-725e-42ac-9ed9-900a10cb726b" absoluteBounds="5.39, 1.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5baedebb-3095-48a7-8a1b-1458ff8e0d03" isExpanded="false" absoluteBounds="0.625, 3.375, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/bric_Setting" />
+      <nestedChildShapes>
+        <elementListCompartment Id="028ef05d-ca8b-4c04-b0a3-83f10fb40428" absoluteBounds="0.63999999999999968, 3.835, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b09ab625-7097-4d2a-b260-1883750b34ae" isExpanded="false" absoluteBounds="5.375, 2.125, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/bric_Trade_Master" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e7d642fb-c3e6-41d0-8843-f5bfff4f52d2" absoluteBounds="5.39, 2.585, 1.9700000000000002, 4.8646240234375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6126db10-bf92-4548-807c-c7eba7bf8f60" isExpanded="false" absoluteBounds="0.625, 2.125, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/bric_item" />
+      <nestedChildShapes>
+        <elementListCompartment Id="432920e5-0ad0-4c7f-a585-1694ccff1ad1" absoluteBounds="0.64000000000000012, 2.585, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9c7fb905-4f5c-49f1-b453-870391aa8b69" isExpanded="false" absoluteBounds="5.375, 1.5, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/bric_PO_Item" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8207a9fe-035d-4371-ab62-62a97c5ac6f1" absoluteBounds="5.3900000000000006, 1.96, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0a647f8c-0f8c-4a88-9dc6-192a04d54e6b" isExpanded="false" absoluteBounds="3.125, 2.25, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/bric_customer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="eca5333d-0c86-4c8b-bcee-3c4a00e32451" absoluteBounds="3.1399999999999997, 2.71, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="33468b48-0a44-413d-9c89-0237a16b0841" isExpanded="false" absoluteBounds="3.125, 2.875, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/bric_CustomerSite" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0320fa49-6d0a-46e6-8f9f-c7ded249d1aa" absoluteBounds="3.1399999999999997, 3.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e905c528-aad5-4217-9d44-739786d28b81" isExpanded="false" absoluteBounds="3.125, 3.5, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/bric_supplier" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5ac84776-f0a5-401c-b889-2da954cd0f06" absoluteBounds="3.1399999999999997, 3.96, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6955022f-eecb-4121-a70d-2995ec709731" isExpanded="false" absoluteBounds="5.5, 2.75, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/bric_InvoiceMst" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9345aa2a-21b0-4c8d-bda8-1dbd9ad41ccd" absoluteBounds="5.515, 3.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="26ad74ff-26c7-4e74-bf88-11c7115d29d4" isExpanded="false" absoluteBounds="0.625, 4.625, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/bric_TransactionCategory" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b443aee5-2036-4a7d-8f51-0062bb41bce3" absoluteBounds="0.63999999999999968, 5.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8a687092-35fd-4d16-bce3-6977255dd74e" isExpanded="false" absoluteBounds="0.625, 4, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/bric_TransactionReference" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b3f24d86-a966-43b3-8ac1-feb263702768" absoluteBounds="0.64000000000000012, 4.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8cdc6632-f0a5-4783-8381-b735ce2e388e" isExpanded="false" absoluteBounds="3.25, 4.125, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/bric_DailyCashbook" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6f1bd9d9-805c-4da5-9227-51434d2ccd51" absoluteBounds="3.265, 4.585, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
