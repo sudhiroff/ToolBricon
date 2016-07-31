@@ -15,17 +15,22 @@
                 </div>
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-12">
-                    <asp:GridView ID="grid" runat="server" Width="50%" CssClass="table table-bordered"
+                    <asp:GridView ID="grid" runat="server" Width="100%" CssClass="table table-bordered"
                         AutoGenerateColumns="false" ShowHeader="true" EmptyDataText="No record found"
                         ShowHeaderWhenEmpty="true" OnRowCommand="grid_RowCommand" OnRowDeleting="grid_RowDeleting"
                         OnRowEditing="grid_RowEditing">
                         <Columns>
-                            <asp:BoundField HeaderText="Currency" DataField="Currency" />
+                            <asp:BoundField HeaderText="Account ID" DataField="LoanNumber" />
+                            <asp:BoundField HeaderText="Borrower/Lender Name" DataField="Borrower_LanderName" />
+                            <asp:BoundField HeaderText="LoanType" DataField="LoanType" />
+                            <asp:BoundField HeaderText="Outstanding Principal Amt." DataField="PrincipalAmt" />
+                            <asp:BoundField HeaderText="Intrest Rate" DataField="IntrestRate" />
+                             <asp:BoundField HeaderText="Contact Detail" DataField="ContactDetail" />
                             <asp:TemplateField>
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="lbtnEdit" Text="Edit" runat="server" CommandName="edit" CommandArgument='<%# Eval("Id") %>'></asp:LinkButton>
-                                    <asp:LinkButton ID="LinkButton1" Text="Delete" runat="server" CommandArgument='<%# Eval("Id") %>'
-                                        CommandName="delete"></asp:LinkButton>
+                                    <asp:LinkButton ID="lbtnEdit" Text="View/Download Statement" CssClass="btn btn-xs btn-info" runat="server" CommandName="view" CommandArgument='<%# Eval("Id") %>'></asp:LinkButton>                                   
+                                     <asp:LinkButton ID="LinkButton1" Text="Edit" runat="server" CommandName="edit" CssClass="btn btn-xs btn-success" CommandArgument='<%# Eval("Id") %>'></asp:LinkButton>
+                                     <asp:LinkButton ID="LinkButton2" Text="Delete" runat="server" CommandArgument='<%# Eval("Id") %>' OnClientClick="return confirm('Are you sure you want to delete it?')" CssClass="btn btn-xs btn-danger" CommandName="delete"></asp:LinkButton>                
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
@@ -51,20 +56,20 @@
                                     <table width="100%">
                                         <tr>
                                             <td>
-                                                Borrower/Lander Name
-                                                <asp:TextBox ID="txtEndDate" CssClass="form-control" placeholder="Borrower/Lander Name" runat="server"
+                                                Borrower/Lender Name
+                                                <asp:TextBox ID="txtName" CssClass="form-control" placeholder="Borrower/Lender Name" runat="server"
                                                     required></asp:TextBox>
                                             </td>
                                             <td>
                                                 Loan Type
-                                                <asp:DropDownList ID="ddlAccountType" runat="server" CssClass="form-control">
-                                                <asp:ListItem Text="Loan" Value="Loan"></asp:ListItem>
+                                                <asp:DropDownList ID="ddlLoanType" runat="server" CssClass="form-control">
+                                                <asp:ListItem Text="Lended" Value="Lended"></asp:ListItem>
                                                  <asp:ListItem Text="Borrow" Value="Borrow"></asp:ListItem>
                                                 </asp:DropDownList>
                                             </td>
                                             <td>
                                                 Principal Amt.
-                                                <asp:TextBox ID="txtStartDate" CssClass="form-control" placeholder="Principal amount" runat="server"
+                                                <asp:TextBox ID="txtPrinAmt" CssClass="form-control" placeholder="Principal amount" runat="server"
                                                     required></asp:TextBox>
                                             </td>                                            
                                         </tr>
@@ -76,19 +81,19 @@
                                         <tr>
                                             <td>
                                                 Start date
-                                                <asp:TextBox ID="txtOrderDes" CssClass="form-control datepckr" placeholder="Start date" runat="server"
+                                                <asp:TextBox ID="txtStartDate" CssClass="form-control datepckr" placeholder="Start date" runat="server"
                                                     required></asp:TextBox>
                                             </td>
                                             <td>
                                                 Intrest Rate
-                                                <asp:TextBox ID="txtShippngAddress" CssClass="form-control" placeholder="%" runat="server"
+                                                <asp:TextBox ID="txtIntrest" CssClass="form-control" placeholder="%" runat="server"
                                                     required></asp:TextBox>
                                             </td>
-                                            <%--<td>
-                                               Interest Now
-                                                <asp:TextBox ID="txtQuantity" CssClass="form-control" placeholder="Interest till date" runat="server"
+                                            <td>
+                                               Contact Detail
+                                                <asp:TextBox ID="txtContactDetail" CssClass="form-control" TextMode="MultiLine" style="height:40px;resize:none" placeholder="Contact detail" runat="server"
                                                     required></asp:TextBox>
-                                            </td>--%>
+                                            </td>
                                         </tr>
                                         <%-- <tr>
                                             <td style="height:2px">

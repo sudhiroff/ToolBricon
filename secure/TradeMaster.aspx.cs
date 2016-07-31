@@ -6,6 +6,11 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Services;
 using System.Web.Script.Services;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Data;
+using System.IO;
+using ClosedXML.Excel;
 
 public partial class secure_TradeMaster : System.Web.UI.Page
 {
@@ -29,11 +34,21 @@ public partial class secure_TradeMaster : System.Web.UI.Page
         ddlClient.DataBind();
         ddlClient.Items.Insert(0, new ListItem("--Select Client--", "0"));
 
+        var sup = (from x in dc.bric_suppliers
+                      select x).ToList();
+        ddlSuplierNo.DataTextField = "SupplierId";
+        ddlSuplierNo.DataValueField = "SupplierId";
+        ddlSuplierNo.DataSource = sup;
+        ddlSuplierNo.DataBind();
+        ddlSuplierNo.Items.Insert(0, new ListItem("--Select Suplier--", "0"));
+        
+
         lstTradeMst = (from x in dc.bric_Trade_Masters
-                      orderby x.Id descending
+                       orderby x.Id descending
                       select x).ToList();
         grid.DataSource = lstTradeMst;
         grid.DataBind();
+        lblCount.InnerText = lstTradeMst.Count.ToString();
     }
     protected void grid_RowCommand(object sender, GridViewCommandEventArgs e)
     {
@@ -164,6 +179,8 @@ public partial class secure_TradeMaster : System.Web.UI.Page
     {
         string strClient = "";
         string strShipDetail = "";
+        string strSuplier = ddlSuplierNo.ClientID == "0" ? "" : ddlSuplierNo.SelectedValue;       
+
         if (ddlClient.SelectedValue != "0")
         {
             strClient = ddlClient.SelectedValue;
@@ -172,64 +189,78 @@ public partial class secure_TradeMaster : System.Web.UI.Page
         {
             strShipDetail = ddlSiteAddress.SelectedValue;
         }
-
-        lstTradeMst = (from x in dc.bric_Trade_Masters
-                       join p in dc.bric_PurchaseOrders on x.POrderId equals p.OrderId
-                       where p.CustomerId.Contains(strClient) && p.ShippingAddress.Contains(strShipDetail)
-                       orderby x.Id descending
-                       select x).ToList();
+        if (!String.IsNullOrEmpty(txtFromDate.Text))
+        {
+            DateTime dtShipDateFrom = DateFormater.ConvertToDate(txtFromDate.Text);
+            DateTime dtShipDateTo = DateFormater.ConvertToDate(txtToDate.Text);
+            lstTradeMst = (from x in dc.bric_Trade_Masters
+                           join p in dc.bric_PurchaseOrders on x.POrderId equals p.OrderId
+                           where p.CustomerId.Contains(strClient) && p.ShippingAddress.Contains(strShipDetail) && x.SuplierId.Contains(strSuplier)
+                           && dtShipDateFrom <= x.Shipdate && dtShipDateTo >= x.Shipdate
+                           orderby x.Id descending
+                           select x).ToList();
+        }
+        else {
+            lstTradeMst = (from x in dc.bric_Trade_Masters
+                           join p in dc.bric_PurchaseOrders on x.POrderId equals p.OrderId
+                           where p.CustomerId.Contains(strClient) && p.ShippingAddress.Contains(strShipDetail) && x.SuplierId.Contains(strSuplier)
+                           orderby x.Id descending
+                           select x).ToList();
+        }
         grid.DataSource = lstTradeMst;
         grid.DataBind();
+        lblCount.InnerText = lstTradeMst.Count.ToString();
 
-
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "none", "<script>datepicker();</script>", false);
     }
 
     protected void lbtnDownload_Click(object sender, EventArgs e)
     {
-        //using (XLWorkbook wb = new XLWorkbook())
-        //{
-        //    wb.Worksheets.Add(dt, "Customers");
+        string constr = ConfigurationManager.ConnectionStrings["BriconToolConnectionString"].ConnectionString;
+        using (SqlConnection con = new SqlConnection(constr))
+        {
+            string query = "";
+            if (txtdFromDate.Text!="" && txtdToDate.Text!="")
+            {               
+                query = "SELECT * FROM bric_Trade_Master where Shipdate>='" + DateFormater.ConvertToDate(txtdFromDate.Text).ToString("MM/dd/yyyy")+ "' and Shipdate<='" + DateFormater.ConvertToDate(txtdToDate.Text).ToString("MM/dd/yyyy") + "'";
+            }
+            else
+            {
+                query = "SELECT * FROM bric_Trade_Master";
+            }
+            using (SqlCommand cmd = new SqlCommand(query))
+            {
+                using (SqlDataAdapter sda = new SqlDataAdapter())
+                {
+                    cmd.Connection = con;
+                    sda.SelectCommand = cmd;
+                    using (DataTable dt = new DataTable())
+                    {
+                        sda.Fill(dt);
+                        using (XLWorkbook wb = new XLWorkbook())
+                        {
+                            wb.Worksheets.Add(dt, "Customers");
 
-        //    Response.Clear();
-        //    Response.Buffer = true;
-        //    Response.Charset = "";
-        //    Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-        //    Response.AddHeader("content-disposition", "attachment;filename=SqlExport.xlsx");
-        //    using (MemoryStream MyMemoryStream = new MemoryStream())
-        //    {
-        //        wb.SaveAs(MyMemoryStream);
-        //        MyMemoryStream.WriteTo(Response.OutputStream);
-        //        Response.Flush();
-        //        Response.End();
-        //    }
-        //}
-
-        //var data = new[]{
-        //                new{ Name="Ram", Email="ram@techbrij.com", Phone="111-222-3333" },
-        //                new{ Name="Shyam", Email="shyam@techbrij.com", Phone="159-222-1596" },
-        //                new{ Name="Mohan", Email="mohan@techbrij.com", Phone="456-222-4569" },
-        //                new{ Name="Sohan", Email="sohan@techbrij.com", Phone="789-456-3333" },
-        //                new{ Name="Karan", Email="karan@techbrij.com", Phone="111-222-1234" },
-        //                new{ Name="Brij", Email="brij@techbrij.com", Phone="111-222-3333" }
-        //       };
-
-
-        //Response.ClearContent();
-        //Response.AddHeader("content-disposition", "attachment;filename=Contact.xls");
-        //Response.AddHeader("Content-Type", "application/vnd.ms-excel");
-        //using (System.IO.StringWriter sw = new System.IO.StringWriter())
-        //{
-        //    using (System.Web.UI.HtmlTextWriter htw = new System.Web.UI.HtmlTextWriter(sw))
-        //    {
-        //        GridView grid1 = new GridView();
-        //        grid1.DataSource = data;
-        //        grid1.DataBind();
-        //        grid1.RenderControl(htw);
-        //        Response.Write(sw.ToString());
-        //    }
-        //}
-
-        //Response.End();
+                            Response.Clear();
+                            Response.Buffer = true;
+                            Response.Charset = "";
+                            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                            Response.AddHeader("content-disposition", "attachment;filename=TradeMaster.xlsx");
+                            using (MemoryStream MyMemoryStream = new MemoryStream())
+                            {
+                                wb.SaveAs(MyMemoryStream);
+                                MyMemoryStream.WriteTo(Response.OutputStream);
+                                Response.Flush();
+                                Response.End();
+                            }
+                        }
+                        txtdFromDate.Text = "";
+                        txtdToDate.Text = "";
+                    }
+                }
+            }
+        }
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "none", "<script>datepicker();</script>", false);
     }
 
     protected void grid_PageIndexChanging(object sender, GridViewPageEventArgs e)

@@ -23,12 +23,18 @@
                     <div class="modal-body clearfix">
                         <div id="area" runat="server" style="width:960px;margin:0 auto;">
                                         <style type="text/css">
+                                            .font-style{
+                                               font-family: Arial, Helvetica, sans-serif;
+                                               font-size: 13px;
+                                            }
                                             .border td{
                                                 border:1px solid #ddd;
                                                 padding:5px;
                                             }
                                             .table-bordered {
                                                 border: 1px solid #ddd;
+                                                font-family: Arial, Helvetica, sans-serif;
+                                               font-size: 13px;
                                             }
                                             .table-bordered > thead > tr > th,
                                             .table-bordered > tbody > tr > th,
@@ -43,7 +49,7 @@
                                                 border-bottom-width: 2px;
                                             }
                                         </style>
-                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                        <table width="100%" cellpadding="0" cellspacing="0" class="font-style">
                                             <tr>
                                                 <td style="width:50%">                                                   
                                                     
@@ -52,11 +58,7 @@
                                                     <h3 style="padding:0px;margin:0px">STATEMENT INVOICE</h3>
                                                 </td>
                                             </tr>
-                                           <tr>
-                                               <td colspan="2">
-                                                   <h4 style="color:#8CB2E3">Proprietor [Rakesh Kumar Yadav (HUF)]</h4>
-                                               </td>
-                                           </tr>
+                                          
                                             <tr>
                                                 <td colspan="2" style="height: 15px">
                                                     ******************************************************* Item Statement ************************************************************

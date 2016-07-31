@@ -191,6 +191,19 @@
       <Column Name="Amount" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="dbo.bric_LoanMaster" Member="bric_LoanMasters">
+    <Type Name="bric_LoanMaster">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LoanNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Borrower_LanderName" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="LoanType" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PrincipalAmt" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="IntrestRate" Type="System.Decimal" DbType="Decimal(18,1) NOT NULL" CanBeNull="false" />
+      <Column Name="EntryDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="ContactDetail" Type="System.String" DbType="NVarChar(400) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Function Name="dbo.GET_INVOICE_ITEM" Method="GET_INVOICE_ITEM">
     <Parameter Name="InvoiceId" Parameter="invoiceId" Type="System.Int32" DbType="Int" />
     <ElementType Name="GET_INVOICE_ITEMResult">
@@ -237,6 +250,13 @@
       <Column Name="BuyRate" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="BuyCost" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="TaxPercentage" Type="System.Decimal" DbType="Decimal(18,1)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GET_Trade_InvChart" Method="GET_Trade_InvChart">
+    <ElementType Name="GET_Trade_InvChartResult">
+      <Column Name="TradeDate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TradeCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="InvCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>

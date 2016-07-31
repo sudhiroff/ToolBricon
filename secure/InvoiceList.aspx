@@ -56,12 +56,18 @@
                                 <div class="modal-body clearfix">
                                     <div id="area" runat="server" style="width:760px;margin:0 auto;">
                                         <style type="text/css">
+                                            .font-style{
+                                               font-family: Arial, Helvetica, sans-serif;
+                                               font-size: 13px;
+                                            }
                                             .border td{
                                                 border:1px solid #ddd;
                                                 padding:5px;
                                             }
                                             .table-bordered {
                                                 border: 1px solid #ddd;
+                                                font-family: Arial, Helvetica, sans-serif;
+                                               font-size: 13px;
                                             }
                                             .table-bordered > thead > tr > th,
                                             .table-bordered > tbody > tr > th,
@@ -76,7 +82,7 @@
                                                 border-bottom-width: 2px;
                                             }
                                         </style>
-                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                        <table width="100%" cellpadding="0" cellspacing="0" class="font-style">
                                             <tr>
                                                 <td style="width:50%">                                                   
                                                     <img id="imgCompanyLogo" runat="server" alt="" src="~/Images/client.jpg" />
@@ -119,7 +125,7 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
-                                                    <table class="border" width="100%" cellpadding="0" cellspacing="0">
+                                                    <table class="border font-style" width="100%" cellpadding="0" cellspacing="0">
                                                         <tr>
                                                             <td style="width:33%;border-bottom:none">Salesperson</td>
                                                             <td style="width:33%;border-bottom:none">Purchaser’s TIN No.</td>
@@ -147,7 +153,7 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
-                                                    <table width="100%" cellpadding="0" cellspacing="0" class="table-bordered">
+                                                    <table width="100%" cellpadding="0" cellspacing="0" class="table-bordered font-style">
                                                         <tr>
                                                             <td style="width: 10%; padding: 3px 0 3px 5px;"><strong>Sr. No.</strong></td>
                                                             <td style="width: 55%; padding: 3px 0 3px 5px;"><strong>Item Description</strong></td>
@@ -196,7 +202,9 @@
                                             </tr>
                                              <tr>
                                                 <td colspan="2" style="height:5px;padding:30px 0 20px 0px;">
-                                                    <h3 style="color:#8CB2E3">FOR BRICON</h3>
+                                                    <div>
+                                                        <img src="../Images/sign.png" alt="signature" />
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -212,7 +220,7 @@
                                                     </p>
                                                 </td>
                                                 <td style="border: 1px solid #ddd; padding: 5px;border-right:none;" align="right" valign="top">
-                                                    <span>Cheque/ DDto be drwan in favour of <b>BRICON</b></span><br /><br />
+                                                    <span>Cheque/DD to be drwan in favour of <b>BRICON</b></span><br /><br />
                                                     <p>
                                                         Banks Transfer Detail:<br />
                                                         Syndicate Bank.<br />

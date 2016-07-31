@@ -14,3 +14,10 @@ ALTER TABLE dbo.bric_InvoiceMst
 ADD IsCash bit NOT NULL 
 DEFAULT 0 WITH VALUES
 
+
+
+
+truncate table bric_InvoiceMst
+truncate table bric_InvoiceItem
+
+update bric_Trade_Master set IsInvoiceGenerate=0

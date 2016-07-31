@@ -132,8 +132,13 @@ public partial class secure_AddTrade : System.Web.UI.Page
                       select x).ToList();
         if (result.Count > 0)
         {
+            txtShipdate.Text = DateFormater.GetDate(Convert.ToDateTime(result[0].Shipdate));
+            int iRateCardId = (from x in dc.bric_PurchaseOrders where x.OrderId == result[0].POrderId select x.Id).FirstOrDefault();
+            LoadItemByPO(iRateCardId);
+            ddlSuplier.SelectedValue = result[0].SuplierId;
             LoadItemByPO(result[0].POrderId);
             hdnPoId.Value = (from x in dc.bric_PurchaseOrders where x.OrderId == result[0].POrderId select x.Id).FirstOrDefault().ToString();
+            PreloadItemCode(iRateCardId);
 
             txtPOrderId.Text = result[0].POrderId;
             ddlItemCode.SelectedValue = result[0].ItemCode;
@@ -163,10 +168,8 @@ public partial class secure_AddTrade : System.Web.UI.Page
                 txtQuantity.Attributes.Remove("readonly");
             }
             txtQuantity.Text = result[0].Quantity.ToString();
-            txtChallanNo.Text = result[0].ChallanNo;
-            ddlSuplier.SelectedValue = result[0].SuplierId;
-            txtShippingAddress.Text = result[0].ShippingAddress;
-            txtShipdate.Text = DateFormater.GetDate(Convert.ToDateTime(result[0].Shipdate));
+            txtChallanNo.Text = result[0].ChallanNo;            
+            txtShippingAddress.Text = result[0].ShippingAddress;            
             txtUnitPrice.Text = result[0].UnitPrice.ToString();
             txtSubTotal.Text = result[0].SubTotal.ToString();
             txtTotalAmt.Text = result[0].TotalAmt.ToString();
@@ -174,6 +177,34 @@ public partial class secure_AddTrade : System.Web.UI.Page
             txtBuyCost.Text = result[0].BuyCost.ToString();
             txtTax.Text = Convert.ToString(result[0].TaxPercentage);
             btnSubmit.Text = "Update";
+        }
+    }
+
+    private void PreloadItemCode(int iRateCardId)
+    {
+        DateTime dtShipDate = DateFormater.ConvertToDate(txtShipdate.Text);
+
+        var res = (from obj in dc.bric_PO_Items
+                   join i in dc.bric_items on obj.ItemCode equals i.ItemCode
+                   where obj.POId == Convert.ToInt32(hdnPoId.Value) && obj.SuplierId == ddlSuplier.SelectedValue
+                   && dtShipDate >= obj.RateFrom && dtShipDate <= obj.RateTo
+                   select new
+                   {
+                       obj.Id,
+                       obj.ItemCode,
+                       obj.ItemDes,
+                       obj.ItemTax,
+                       obj.Quantity,
+                       obj.SellRate,
+                       obj.BuyRate,
+                       i.IsCalculateByDimenson
+                   }).ToList();
+        if (res.Count > 0)
+        {
+            ddlItemCode.DataTextField = "ItemCode";
+            ddlItemCode.DataValueField = "ItemCode";
+            ddlItemCode.DataSource = res;
+            ddlItemCode.DataBind();
         }
     }
 
@@ -202,6 +233,11 @@ public partial class secure_AddTrade : System.Web.UI.Page
                     result[0].V_wdth_Inc = Convert.ToInt32(txtVwidthInc.Text);
                     result[0].V_height_ft = Convert.ToInt32(txtVheightFit.Text);
                     result[0].V_height_Inc = Convert.ToInt32(txtVheightInc.Text);
+                    result[0].Quantity = ((result[0].V_length_ft + (result[0].V_length_Inc / 12)) * (result[0].V_wdth_ft + (result[0].V_wdth_Inc / 12)) * (result[0].V_height_ft + (result[0].V_height_Inc / 12)));
+                }
+                else
+                {
+                    result[0].Quantity = Convert.ToInt32(txtQuantity.Text);
                 }
                 result[0].Quantity = Convert.ToInt32(txtQuantity.Text);
                 result[0].ChallanNo = txtChallanNo.Text;
@@ -214,46 +250,75 @@ public partial class secure_AddTrade : System.Web.UI.Page
                 result[0].BuyRate = Convert.ToDecimal(txtBuyRate.Text);
                 result[0].BuyCost = Convert.ToDecimal(txtBuyCost.Text);
                 result[0].TaxPercentage = Convert.ToDecimal(txtTax.Text.Trim());
+                result[0].BuyCost = CalulateSubCost(result[0].BuyRate, result[0].Quantity);
+                result[0].SubTotal = CalulateSubTotal(result[0].UnitPrice, result[0].Quantity);
+                result[0].TotalAmt = CalculateGrandTotal(result[0].TaxPercentage, result[0].SubTotal);
                 dc.SubmitChanges();
                 btnSubmit.Text = "Submit";
             }
         }
         else
         {
-            bric_Trade_Master obj = new bric_Trade_Master();
-            obj.POrderId = txtPOrderId.Text.Trim();
-            obj.ItemDescription = txtItemDescription.Text;
-            obj.ItemCode = ddlItemCode.SelectedValue;
-            if (hdnVehicleExist.Value == "false")
+            DateTime dtShipDate = DateFormater.ConvertToDate(txtShipdate.Text);
+            var chkDuplicate = (from x in dc.bric_Trade_Masters
+                                where x.ChallanNo == txtChallanNo.Text.Trim() && x.Shipdate == dtShipDate
+                                select x).ToList();
+            if (chkDuplicate.Count == 0)
             {
-                AddVehicleInDatabase(txtVehicleNo.Text);
+                bric_Trade_Master obj = new bric_Trade_Master();
+                obj.POrderId = txtPOrderId.Text.Trim();
+                obj.ItemDescription = txtItemDescription.Text;
+                obj.ItemCode = ddlItemCode.SelectedValue;
+                if (hdnVehicleExist.Value == "false")
+                {
+                    AddVehicleInDatabase(txtVehicleNo.Text);
+                }
+                obj.VehicleNo = txtVehicleNo.Text;
+                if (chkIsAutoCalDim() == true)
+                {
+                    obj.V_length_ft = Convert.ToInt32(txtVlengthFit.Text);
+                    obj.V_length_Inc = Convert.ToInt32(txtVlengthInc.Text);
+                    obj.V_wdth_ft = Convert.ToInt32(txtVwdthFit.Text);
+                    obj.V_wdth_Inc = Convert.ToInt32(txtVwidthInc.Text);
+                    obj.V_height_ft = Convert.ToInt32(txtVheightFit.Text);
+                    obj.V_height_Inc = Convert.ToInt32(txtVheightInc.Text);
+                    obj.Quantity = ((obj.V_length_ft + (obj.V_length_Inc / 12)) * (obj.V_wdth_ft + (obj.V_wdth_Inc / 12)) * (obj.V_height_ft + (obj.V_height_Inc / 12)));
+                }
+                else
+                {
+                    obj.Quantity = Convert.ToInt32(txtQuantity.Text);
+                }                
+                obj.ChallanNo = txtChallanNo.Text;
+                obj.SuplierId = ddlSuplier.SelectedValue;
+                obj.ShippingAddress = txtShippingAddress.Text;
+                obj.Shipdate = DateFormater.ConvertToDate(txtShipdate.Text);                
+                obj.UnitPrice = Convert.ToDecimal(txtUnitPrice.Text);                
+                obj.TaxPercentage = Convert.ToDecimal(txtTax.Text.Trim());                
+                obj.BuyRate = Convert.ToDecimal(txtBuyRate.Text);
+                obj.BuyCost = CalulateSubCost(obj.BuyRate, obj.Quantity);
+                obj.SubTotal = CalulateSubTotal(obj.UnitPrice, obj.Quantity);
+                obj.TotalAmt = CalculateGrandTotal(obj.TaxPercentage, obj.SubTotal);
+                obj.CreateDate = DateFormater.ConvertToDate(DateTime.Today.ToString("dd/MM/yyyy"));
+                dc.bric_Trade_Masters.InsertOnSubmit(obj);
+                dc.SubmitChanges();
             }
-            obj.VehicleNo = txtVehicleNo.Text;
-            if (chkIsAutoCalDim() == true)
-            {
-                obj.V_length_ft = Convert.ToInt32(txtVlengthFit.Text);
-                obj.V_length_Inc = Convert.ToInt32(txtVlengthInc.Text);
-                obj.V_wdth_ft = Convert.ToInt32(txtVwdthFit.Text);
-                obj.V_wdth_Inc = Convert.ToInt32(txtVwidthInc.Text);
-                obj.V_height_ft = Convert.ToInt32(txtVheightFit.Text);
-                obj.V_height_Inc = Convert.ToInt32(txtVheightInc.Text);
-            }
-            obj.ChallanNo = txtChallanNo.Text;
-            obj.SuplierId = ddlSuplier.SelectedValue;
-            obj.ShippingAddress = txtShippingAddress.Text;
-            obj.Shipdate = DateFormater.ConvertToDate(txtShipdate.Text);
-            obj.Quantity = Convert.ToInt32(txtQuantity.Text);
-            obj.UnitPrice = Convert.ToDecimal(txtUnitPrice.Text);
-            obj.SubTotal = Convert.ToDecimal(txtSubTotal.Text);
-            obj.TaxPercentage = Convert.ToDecimal(txtTax.Text.Trim());
-            obj.TotalAmt = Convert.ToDecimal(txtTotalAmt.Text);
-            obj.BuyRate = Convert.ToDecimal(txtBuyRate.Text);
-            obj.BuyCost = Convert.ToDecimal(txtBuyCost.Text);
-            obj.CreateDate = DateFormater.ConvertToDate(DateTime.Today.ToString("dd/MM/yyyy"));
-            dc.bric_Trade_Masters.InsertOnSubmit(obj);
-            dc.SubmitChanges();
         }
         Response.Redirect("TradeMaster.aspx");
+    }
+
+    private decimal? CalculateGrandTotal(decimal? taxPercentage, decimal? subTotal)
+    {
+        return (subTotal * taxPercentage) / 100 + subTotal;
+    }
+
+    private decimal? CalulateSubCost(decimal? buyRate, int? quantity)
+    {
+        return buyRate * quantity;
+    }
+
+    private decimal? CalulateSubTotal(decimal? unitPrice, int? quantity)
+    {
+        return unitPrice * quantity;
     }
 
     private bool chkIsAutoCalDim()
@@ -266,10 +331,16 @@ public partial class secure_AddTrade : System.Web.UI.Page
 
     private void AddVehicleInDatabase(string text)
     {
-        bric_Vehicle obj = new bric_Vehicle();
-        obj.VehicleNo = text;
-        dc.bric_Vehicles.InsertOnSubmit(obj);
-        dc.SubmitChanges();
+        var chk = (from x in dc.bric_Vehicles
+                   where x.VehicleNo == text.Trim()
+                   select x).FirstOrDefault();
+        if (chk == null)
+        {
+            bric_Vehicle obj = new bric_Vehicle();
+            obj.VehicleNo = text;
+            dc.bric_Vehicles.InsertOnSubmit(obj);
+            dc.SubmitChanges();
+        }
     }
 
     [WebMethod]
@@ -343,13 +414,16 @@ public partial class secure_AddTrade : System.Web.UI.Page
                        obj.ItemDes,
                        obj.BuyRate,
                        obj.SellRate,
-                       i.IsCalculateByDimenson
+                       i.IsCalculateByDimenson,
+                       i.TaxPercent
                    }).ToList();
         if (res.Count > 0)
         {
             txtItemDescription.Text = res[0].ItemDes;
             txtBuyRate.Text = res[0].BuyRate.ToString();
             txtUnitPrice.Text = res[0].SellRate.ToString();
+            txtTax.Text = res[0].TaxPercent.ToString();
+
             txtItemDescription.Attributes.Add("readonly", "readonly");
             if (res[0].IsCalculateByDimenson == false)
             {

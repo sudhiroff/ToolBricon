@@ -33,18 +33,32 @@
         }
     </script>
     <div class="row">
+        
+                <div class="col-lg-12">
+                    <div class="col-md-12 clearfix" style="padding-left: 0px;">
+                        <table>
+                            <tr>
+                                <td> <h3 class="page-header" style="float: left">Daily cash book</h3></td>
+                                <td><asp:LinkButton Style="float: left; margin-left: 20px" ID="LinkButton1" Text="Add New" runat="server" CssClass="btn btn-success" data-toggle="modal" data-target="#myModal"></asp:LinkButton></td>
+                                <td style="padding-left:20px"> <asp:TextBox ID="txtdFromDate" style="width:120px" runat="server" placeholder="from date" CssClass="form-control datepckr"></asp:TextBox>
+                                </td>
+                                <td style="padding-left:5px"><asp:TextBox ID="txtdToDate" runat="server" placeholder="To date" style="width:120px" CssClass="form-control datepckr"></asp:TextBox></td>
+
+                                <td><asp:LinkButton ID="lbtnDownload" runat="server" Text="Download" CssClass="btn btn-info btn-sm" Style="float: left; margin-left: 20px;" OnClick="lbtnDownload_Click"></asp:LinkButton></td>
+                                
+                            </tr>
+                        </table>                 
+                     </div>
+                </div>
+                <!-- /.col-lg-12 -->
         <asp:UpdatePanel ID="uppanel" runat="server">
             <ContentTemplate>
                 <div class="col-lg-12">
-                    <h3 class="page-header">Daily cash book</h3>
-                </div>
-                <!-- /.col-lg-12 -->
-                <div class="col-lg-12">
                     <asp:GridView ID="grid" runat="server" Width="100%"
                         CssClass="table table-bordered" AutoGenerateColumns="false" ShowHeader="true"
-                        EmptyDataText="No record found" ShowHeaderWhenEmpty="true"
-                        OnRowCommand="grid_RowCommand" OnRowDeleting="grid_RowDeleting"
-                        OnRowEditing="grid_RowEditing">
+                        EmptyDataText="No record found" ShowHeaderWhenEmpty="true" AllowPaging="true" PageSize="14"
+                        OnRowCommand="grid_RowCommand" OnRowDeleting="grid_RowDeleting" OnPageIndexChanging="grid_PageIndexChanging"
+                        OnRowEditing="grid_RowEditing"  PagerStyle-CssClass="pagination-sm pagination">
                         <Columns>
                             <asp:TemplateField HeaderText="S.No.">
                                 <ItemTemplate><%#Container.DataItemIndex + 1 %></ItemTemplate>
@@ -65,10 +79,10 @@
                     </asp:GridView>
                 </div>
 
-                <div class="col-lg-12">
+                <%--<div class="col-lg-12">
                     <asp:LinkButton ID="lbtnAdd" Text="Add New" runat="server" CssClass="btn btn-success" data-toggle="modal" data-target="#myModal"></asp:LinkButton>
 
-                </div>
+                </div>--%>
 
                 <div class="col-lg-12">
                     <!-- Modal -->

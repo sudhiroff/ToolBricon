@@ -48,6 +48,7 @@ ul.ui-autocomplete
 
 .pagination{
    margin: 2px 2px;
+   position: absolute;
 }
 .pagination>td{
     padding:0px!important;

@@ -83,6 +83,9 @@ public partial class DataClassesDataContext : System.Data.Linq.DataContext
   partial void Insertbric_DailyCashbook(bric_DailyCashbook instance);
   partial void Updatebric_DailyCashbook(bric_DailyCashbook instance);
   partial void Deletebric_DailyCashbook(bric_DailyCashbook instance);
+  partial void Insertbric_LoanMaster(bric_LoanMaster instance);
+  partial void Updatebric_LoanMaster(bric_LoanMaster instance);
+  partial void Deletebric_LoanMaster(bric_LoanMaster instance);
   #endregion
 	
 	public DataClassesDataContext() : 
@@ -259,6 +262,14 @@ public partial class DataClassesDataContext : System.Data.Linq.DataContext
 		}
 	}
 	
+	public System.Data.Linq.Table<bric_LoanMaster> bric_LoanMasters
+	{
+		get
+		{
+			return this.GetTable<bric_LoanMaster>();
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GET_INVOICE_ITEM")]
 	public ISingleResult<GET_INVOICE_ITEMResult> GET_INVOICE_ITEM([global::System.Data.Linq.Mapping.ParameterAttribute(Name="InvoiceId", DbType="Int")] System.Nullable<int> invoiceId)
 	{
@@ -271,6 +282,13 @@ public partial class DataClassesDataContext : System.Data.Linq.DataContext
 	{
 		IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), clientId, siteAddress, fromDate, toDate);
 		return ((ISingleResult<GET_CREATE_INVOICE_ITEMResult>)(result.ReturnValue));
+	}
+	
+	[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GET_Trade_InvChart")]
+	public ISingleResult<GET_Trade_InvChartResult> GET_Trade_InvChart()
+	{
+		IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		return ((ISingleResult<GET_Trade_InvChartResult>)(result.ReturnValue));
 	}
 }
 
@@ -3814,6 +3832,260 @@ public partial class bric_DailyCashbook : INotifyPropertyChanging, INotifyProper
 	}
 }
 
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.bric_LoanMaster")]
+public partial class bric_LoanMaster : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _Id;
+	
+	private string _LoanNumber;
+	
+	private string _Borrower_LanderName;
+	
+	private string _LoanType;
+	
+	private decimal _PrincipalAmt;
+	
+	private System.DateTime _StartDate;
+	
+	private decimal _IntrestRate;
+	
+	private System.DateTime _EntryDate;
+	
+	private string _ContactDetail;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnLoanNumberChanging(string value);
+    partial void OnLoanNumberChanged();
+    partial void OnBorrower_LanderNameChanging(string value);
+    partial void OnBorrower_LanderNameChanged();
+    partial void OnLoanTypeChanging(string value);
+    partial void OnLoanTypeChanged();
+    partial void OnPrincipalAmtChanging(decimal value);
+    partial void OnPrincipalAmtChanged();
+    partial void OnStartDateChanging(System.DateTime value);
+    partial void OnStartDateChanged();
+    partial void OnIntrestRateChanging(decimal value);
+    partial void OnIntrestRateChanged();
+    partial void OnEntryDateChanging(System.DateTime value);
+    partial void OnEntryDateChanged();
+    partial void OnContactDetailChanging(string value);
+    partial void OnContactDetailChanged();
+    #endregion
+	
+	public bric_LoanMaster()
+	{
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int Id
+	{
+		get
+		{
+			return this._Id;
+		}
+		set
+		{
+			if ((this._Id != value))
+			{
+				this.OnIdChanging(value);
+				this.SendPropertyChanging();
+				this._Id = value;
+				this.SendPropertyChanged("Id");
+				this.OnIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoanNumber", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+	public string LoanNumber
+	{
+		get
+		{
+			return this._LoanNumber;
+		}
+		set
+		{
+			if ((this._LoanNumber != value))
+			{
+				this.OnLoanNumberChanging(value);
+				this.SendPropertyChanging();
+				this._LoanNumber = value;
+				this.SendPropertyChanged("LoanNumber");
+				this.OnLoanNumberChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Borrower_LanderName", DbType="NVarChar(200) NOT NULL", CanBeNull=false)]
+	public string Borrower_LanderName
+	{
+		get
+		{
+			return this._Borrower_LanderName;
+		}
+		set
+		{
+			if ((this._Borrower_LanderName != value))
+			{
+				this.OnBorrower_LanderNameChanging(value);
+				this.SendPropertyChanging();
+				this._Borrower_LanderName = value;
+				this.SendPropertyChanged("Borrower_LanderName");
+				this.OnBorrower_LanderNameChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoanType", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+	public string LoanType
+	{
+		get
+		{
+			return this._LoanType;
+		}
+		set
+		{
+			if ((this._LoanType != value))
+			{
+				this.OnLoanTypeChanging(value);
+				this.SendPropertyChanging();
+				this._LoanType = value;
+				this.SendPropertyChanged("LoanType");
+				this.OnLoanTypeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrincipalAmt", DbType="Decimal(18,2) NOT NULL")]
+	public decimal PrincipalAmt
+	{
+		get
+		{
+			return this._PrincipalAmt;
+		}
+		set
+		{
+			if ((this._PrincipalAmt != value))
+			{
+				this.OnPrincipalAmtChanging(value);
+				this.SendPropertyChanging();
+				this._PrincipalAmt = value;
+				this.SendPropertyChanged("PrincipalAmt");
+				this.OnPrincipalAmtChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartDate", DbType="Date NOT NULL")]
+	public System.DateTime StartDate
+	{
+		get
+		{
+			return this._StartDate;
+		}
+		set
+		{
+			if ((this._StartDate != value))
+			{
+				this.OnStartDateChanging(value);
+				this.SendPropertyChanging();
+				this._StartDate = value;
+				this.SendPropertyChanged("StartDate");
+				this.OnStartDateChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IntrestRate", DbType="Decimal(18,1) NOT NULL")]
+	public decimal IntrestRate
+	{
+		get
+		{
+			return this._IntrestRate;
+		}
+		set
+		{
+			if ((this._IntrestRate != value))
+			{
+				this.OnIntrestRateChanging(value);
+				this.SendPropertyChanging();
+				this._IntrestRate = value;
+				this.SendPropertyChanged("IntrestRate");
+				this.OnIntrestRateChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EntryDate", DbType="Date NOT NULL")]
+	public System.DateTime EntryDate
+	{
+		get
+		{
+			return this._EntryDate;
+		}
+		set
+		{
+			if ((this._EntryDate != value))
+			{
+				this.OnEntryDateChanging(value);
+				this.SendPropertyChanging();
+				this._EntryDate = value;
+				this.SendPropertyChanged("EntryDate");
+				this.OnEntryDateChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContactDetail", DbType="NVarChar(400) NOT NULL", CanBeNull=false)]
+	public string ContactDetail
+	{
+		get
+		{
+			return this._ContactDetail;
+		}
+		set
+		{
+			if ((this._ContactDetail != value))
+			{
+				this.OnContactDetailChanging(value);
+				this.SendPropertyChanging();
+				this._ContactDetail = value;
+				this.SendPropertyChanged("ContactDetail");
+				this.OnContactDetailChanged();
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
 public partial class GET_INVOICE_ITEMResult
 {
 	
@@ -4455,6 +4727,68 @@ public partial class GET_CREATE_INVOICE_ITEMResult
 			if ((this._TaxPercentage != value))
 			{
 				this._TaxPercentage = value;
+			}
+		}
+	}
+}
+
+public partial class GET_Trade_InvChartResult
+{
+	
+	private System.Nullable<int> _TradeDate;
+	
+	private int _TradeCount;
+	
+	private int _InvCount;
+	
+	public GET_Trade_InvChartResult()
+	{
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TradeDate", DbType="Int")]
+	public System.Nullable<int> TradeDate
+	{
+		get
+		{
+			return this._TradeDate;
+		}
+		set
+		{
+			if ((this._TradeDate != value))
+			{
+				this._TradeDate = value;
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TradeCount", DbType="Int NOT NULL")]
+	public int TradeCount
+	{
+		get
+		{
+			return this._TradeCount;
+		}
+		set
+		{
+			if ((this._TradeCount != value))
+			{
+				this._TradeCount = value;
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvCount", DbType="Int NOT NULL")]
+	public int InvCount
+	{
+		get
+		{
+			return this._InvCount;
+		}
+		set
+		{
+			if ((this._InvCount != value))
+			{
+				this._InvCount = value;
 			}
 		}
 	}

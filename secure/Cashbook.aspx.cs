@@ -1,5 +1,10 @@
-﻿using System;
+﻿using ClosedXML.Excel;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Script.Services;
@@ -40,6 +45,7 @@ public partial class secure_Cashbook : System.Web.UI.Page
         var result = (from x in dc.bric_DailyCashbooks
                       join c in dc.bric_TransactionCategories on x.TransactionCat equals c.Id
                       join r in dc.bric_TransactionReferences on x.TransactionRef equals r.Id
+                      orderby x.Id descending
                       select new {
                           x.Id,
                           x.Narration,
@@ -162,5 +168,60 @@ public partial class secure_Cashbook : System.Web.UI.Page
                              select x).ToList();
             return reference.ToList();
         }
+    }
+
+    protected void lbtnDownload_Click(object sender, EventArgs e)
+    {
+        string constr = ConfigurationManager.ConnectionStrings["BriconToolConnectionString"].ConnectionString;
+        using (SqlConnection con = new SqlConnection(constr))
+        {
+            string query = "";
+            if (txtdFromDate.Text != "" && txtdToDate.Text != "")
+            {
+                query = "SELECT * FROM bric_DailyCashbook where StartDate>='" + DateFormater.ConvertToDate(txtdFromDate.Text).ToString("MM/dd/yyyy") + "' and StartDate<='" + DateFormater.ConvertToDate(txtdToDate.Text).ToString("MM/dd/yyyy") + "'";
+            }
+            else
+            {
+                query = "SELECT * FROM bric_DailyCashbook";
+            }
+            using (SqlCommand cmd = new SqlCommand(query))
+            {
+                using (SqlDataAdapter sda = new SqlDataAdapter())
+                {
+                    cmd.Connection = con;
+                    sda.SelectCommand = cmd;
+                    using (DataTable dt = new DataTable())
+                    {
+                        sda.Fill(dt);
+                        using (XLWorkbook wb = new XLWorkbook())
+                        {
+                            wb.Worksheets.Add(dt, "CashBook");
+
+                            Response.Clear();
+                            Response.Buffer = true;
+                            Response.Charset = "";
+                            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                            Response.AddHeader("content-disposition", "attachment;filename=CashBook.xlsx");
+                            using (MemoryStream MyMemoryStream = new MemoryStream())
+                            {
+                                wb.SaveAs(MyMemoryStream);
+                                MyMemoryStream.WriteTo(Response.OutputStream);
+                                Response.Flush();
+                                Response.End();
+                            }
+                        }
+                        txtdFromDate.Text = "";
+                        txtdToDate.Text = "";
+                    }
+                }
+            }
+        }
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "none", "<script>datepicker();</script>", false);
+    }
+
+    protected void grid_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        grid.PageIndex = e.NewPageIndex;
+        LoadData();
     }
 }

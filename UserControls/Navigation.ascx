@@ -6,7 +6,7 @@
                 <a href="Dashboard.aspx"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
             </li>
             <li>
-                <a href="~/secure/PurchaseOrder.aspx" runat="server"><i class="fa fa-list-ul fa-fw"></i>Purchase Order</a>
+                <a href="~/secure/PurchaseOrder.aspx" runat="server"><i class="fa fa-list-ul fa-fw"></i>Rate Cards</a>
             </li>
             <li>
                 <a href="~/secure/TradeMaster.aspx" runat="server"><i class="fa fa-list-ul fa-fw"></i>Trade Master</a>

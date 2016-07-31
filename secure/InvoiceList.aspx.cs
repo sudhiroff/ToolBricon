@@ -91,13 +91,19 @@ public partial class secure_InvoiceList : System.Web.UI.Page
                             ItemDescription= x.ItemDescription,
                             x.SubTotal,
                             x.UnitPrice,
-                            TaxPercentage= (invoiceResult[0].IsCash==true?0:x.TaxPercentage),
-                            x.VehicleNo,
-                            TaxAmount= (invoiceResult[0].IsCash == true ?0:GetTaxAmount(x.SubTotal, x.TaxPercentage)),
-                            x.ChallanNo,
-                            x.Shipdate
+                            TaxPercentage= (invoiceResult[0].IsCash==true?0:x.TaxPercentage),                            
                         }).ToList();
-            rptItem.DataSource = Item;
+
+           var resultn = Item.GroupBy(l => new { l.ItemDescription,l.UnitPrice })
+                            .Select(cl => new 
+                            {
+                                ItemDescription = cl.First().ItemDescription,
+                                Quantity = cl.Sum(c => c.Quantity).ToString(),
+                                SubTotal = cl.Sum(c => c.SubTotal).ToString(),
+                                UnitPrice = cl.First().UnitPrice,
+                            }).ToList();
+
+            rptItem.DataSource = resultn;
             rptItem.DataBind();
             if (Item.Count > 0)
             {

@@ -36,12 +36,12 @@ public partial class secure_Create_Invoice : System.Web.UI.Page
         if (ddlInvOption.SelectedValue == "true")
         {
             inv.tempInvoiceNo = GetLastInvoiceId(true);
-            inv.InvoiceNo = "INVCSH-" + String.Format("{0:D3}", inv.tempInvoiceNo);
+            inv.InvoiceNo = "BC/" + DateTime.Today.ToString("MMM") + "/" + DateTime.Today.ToString("yy") + "/CS" + String.Format("{0:D3}", inv.tempInvoiceNo);
         }
         else
         {
             inv.tempInvoiceNo = GetLastInvoiceId(false);
-            inv.InvoiceNo = "INVCHQ-" + String.Format("{0:D3}", inv.tempInvoiceNo);
+            inv.InvoiceNo = "BC/" + DateTime.Today.ToString("MMM") + "/" + DateTime.Today.ToString("yy") + "/" + String.Format("{0:D3}", inv.tempInvoiceNo);
         }
         dc.bric_InvoiceMsts.InsertOnSubmit(inv);
         dc.SubmitChanges();
